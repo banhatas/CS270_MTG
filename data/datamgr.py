@@ -73,6 +73,9 @@ def update_db(time_tol = 3):
     # if it has been a while, update database
     if days_since_last_upd > time_tol:
 
+        # debug
+        print("Updating the database...")
+
         # update db
         db = MtgDB(DB_NAME)
         db.scryfall_bulk_update()
@@ -85,7 +88,7 @@ def update_db(time_tol = 3):
             day = "0" + str(today.day)
         date_str = year + ' ' + mon + ' ' + day
 
-        with open(upd_file, 'r') as f:
+        with open(upd_file, 'w') as f:
             f.write(date_str)
 
 def get_db():
@@ -281,7 +284,20 @@ def get_df(save_csv=False, csv_name='mtg_data.csv'):
     # TODO
 
     # binary keywords
-    # TODO: determine what keywords we think are important
+    kw_to_keep = ['Flying', 'Enchant', 
+                  'First strike', 'Equip', 
+                  'Vigilance', 'Transform',
+                  'Cycling', 'Haste', 
+                  'Trample', 'Mill', 
+                  'Flash', 'Scry']
+    for i, kw in enumerate(kw_to_keep):
+        cname = "has_kw_" + kw
+        df[cname] = df.apply(has_entry, axis=1, args=('keywords', kw))
+
+    # number of keywords
+    num_kw = lambda row: len(row['keywords'])
+    df["number_keywords"] = df.apply(num_kw, axis=1)
+    cols_to_drop.append('keywords')
 
     # artist
     # TODO: there are over 1600, how do we deal with this?
