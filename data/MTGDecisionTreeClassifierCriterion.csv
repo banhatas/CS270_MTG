@@ -1,0 +1,4 @@
+Activation Function,Mean Absolute Error,Mean Squared Error,Average Training Accuracy,Average Test Accuracy
+gini,0.0,0.0,1.0,1.0
+entropy,0.0,0.0,1.0,1.0
+log_loss,0.0,0.0,1.0,1.0
