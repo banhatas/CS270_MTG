@@ -1,0 +1,2 @@
+Criterion,min_samples_split,ccp_alpha,Mean Absolute Error,Mean Squared Error,Average Training Score,Average Test Score
+friedman_mse,94,0.015,107.25898529616964,87837.50113915342,0.8924006058681659,0.8606768226950818
